@@ -18,6 +18,18 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build apache
-      run: docker build . --file images/apache-php/Dockerfile --tag apache-php:latest
+      run: docker build . --file images/apache-php/Dockerfile --tag ghcr.io/slapcat/apache-php:latest
     - name: Build nextcloud
-      run: docker build . --file images/nextcloud-latest/Dockerfile --tag nextcloud:latest
+      run: docker build . --file images/nextcloud-latest/Dockerfile --tag ghcr.io/slapcat/nextcloud:latest
+    
+    - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Push apache
+      run: docker push ghcr.io/slapcat/nextcloud:latest
+    - name: Push nextcloud
+      run: docker push ghcr.io/slapcat/apache-php:latest
