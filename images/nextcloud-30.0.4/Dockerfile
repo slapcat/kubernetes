@@ -1,4 +1,4 @@
-FROM apache-php:latest
+FROM ghcr.io/slapcat/apache-php:latest
 RUN apt-get update && apt-get install --no-install-recommends -y \
 		curl \
 		gnupg \
