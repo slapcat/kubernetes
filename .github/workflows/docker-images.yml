@@ -14,7 +14,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+      packages: write
+      
     steps:
     - uses: actions/checkout@v4
     - name: Build apache
@@ -30,6 +33,6 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Push apache
-      run: docker push ghcr.io/slapcat/nextcloud:latest
-    - name: Push nextcloud
       run: docker push ghcr.io/slapcat/apache-php:latest
+    - name: Push nextcloud
+      run: docker push ghcr.io/slapcat/nextcloud:latest
