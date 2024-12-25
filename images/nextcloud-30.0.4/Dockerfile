@@ -8,8 +8,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 		ca-certificates \
 		libmagickcore-6.q16-6-extra
 
-ENV PHP_MEMORY_LIMIT -1
-ENV PHP_UPLOAD_LIMIT 16G
 ENV CLI_INI_DIR /etc/php/8.2/cli/conf.d
 ENV APACHE_INI_DIR /etc/php/8.2/apache2/conf.d
 
@@ -27,9 +25,9 @@ RUN { \
         echo 'opcache.revalidate_freq=60'; \
         echo 'opcache.jit=1255'; \
         echo 'opcache.jit_buffer_size=128M'; \
-        echo 'memory_limit=${PHP_MEMORY_LIMIT}'; \
-        echo 'upload_max_filesize=${PHP_UPLOAD_LIMIT}'; \
-        echo 'post_max_size=${PHP_UPLOAD_LIMIT}'; \
+        echo 'memory_limit=-1'; \
+        echo 'upload_max_filesize=16G'; \
+        echo 'post_max_size=16G'; \
 	echo 'apc.enable_cli=1'; \
 	echo 'output_buffering = off'; \
     } > "${APACHE_INI_DIR}/99-override.ini"; \
@@ -43,9 +41,9 @@ RUN { \
         echo 'opcache.revalidate_freq=60'; \
         echo 'opcache.jit=1255'; \
         echo 'opcache.jit_buffer_size=128M'; \
-        echo 'memory_limit=${PHP_MEMORY_LIMIT}'; \
-        echo 'upload_max_filesize=${PHP_UPLOAD_LIMIT}'; \
-        echo 'post_max_size=${PHP_UPLOAD_LIMIT}'; \
+        echo 'memory_limit=-1'; \
+        echo 'upload_max_filesize=16G'; \
+        echo 'post_max_size=16G'; \
         echo 'apc.enable_cli=1'; \
 	echo 'output_buffering = off'; \
     } > "${CLI_INI_DIR}/99-override.ini";
