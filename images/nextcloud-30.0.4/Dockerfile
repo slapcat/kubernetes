@@ -1,5 +1,6 @@
 FROM ghcr.io/slapcat/apache-php:latest
 RUN apt-get update && apt-get install --no-install-recommends -y \
+		sudo \
 		curl \
 		gnupg \
 		bzip2 \
@@ -20,7 +21,7 @@ RUN { \
         echo 'opcache.enable=1'; \
         echo 'opcache.interned_strings_buffer=32'; \
         echo 'opcache.max_accelerated_files=10000'; \
-        echo 'opcache.memory_consumption=128'; \
+        echo 'opcache.memory_consumption=256'; \
         echo 'opcache.save_comments=1'; \
         echo 'opcache.revalidate_freq=60'; \
         echo 'opcache.jit=1255'; \
@@ -36,7 +37,7 @@ RUN { \
         echo 'opcache.enable=1'; \
         echo 'opcache.interned_strings_buffer=32'; \
         echo 'opcache.max_accelerated_files=10000'; \
-        echo 'opcache.memory_consumption=128'; \
+        echo 'opcache.memory_consumption=256'; \
         echo 'opcache.save_comments=1'; \
         echo 'opcache.revalidate_freq=60'; \
         echo 'opcache.jit=1255'; \
