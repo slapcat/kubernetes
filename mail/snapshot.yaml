@@ -1,0 +1,11 @@
+apiVersion: snapshot.kubevirt.io/v1beta1
+kind: VirtualMachineSnapshot
+metadata:
+  name: snap-mail
+  namespace: vm
+spec:
+  source:
+    apiGroup: kubevirt.io
+    kind: VirtualMachine
+    name: mail
+  failureDeadline: 1m

@@ -1,0 +1,11 @@
+apiVersion: kubevirt-manager.io/v1
+kind: Image
+metadata:
+  name: bookworm
+  namespace: default
+spec:
+  http:
+    url: https://cdimage.debian.org/images/cloud/bookworm-backports/latest/debian-12-backports-generic-amd64.raw
+  readableDescription: debian 12
+  readableName: bookworm
+  type: http

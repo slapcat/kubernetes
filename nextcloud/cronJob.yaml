@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nextcloud
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 15
+      template:
+        spec:
+          volumes:
+          - name: data
+            persistentVolumeClaim:
+              claimName: nextcloud-pvc
+          - name: config
+            persistentVolumeClaim:
+              claimName: nextcloud-conf-pvc
+          containers:
+          - image: ghcr.io/slapcat/nextcloud:latest
+            name: nextcloud
+            volumeMounts:
+            - mountPath: "/var/www/html/nextcloud/data"
+              name: data
+            - mountPath: "/var/www/html/nextcloud/config"
+              name: config
+            command:
+            - /bin/sh
+            - -c
+            - sudo -u www-data php -f /var/www/html/nextcloud/cron.php
+          restartPolicy: OnFailure

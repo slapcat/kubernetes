@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/app-root: /guacamole
+  name: guacamole
+  namespace: guacamole
+spec:
+  tls:
+    - hosts:
+        - rats.nabasny.com
+      secretName: rats.nabasny.com
+  rules:
+    - host: rats.nabasny.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: guacamole
+                port:
+                  number: 80

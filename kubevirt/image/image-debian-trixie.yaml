@@ -1,0 +1,10 @@
+apiVersion: kubevirt-manager.io/v1
+kind: Image
+metadata:
+  name: trixie
+spec:
+  http:
+    url: https://cdimage.debian.org/images/cloud/trixie/daily/latest/debian-13-generic-amd64-daily.raw
+  readableDescription: debian 13
+  readableName: trixie
+  type: http

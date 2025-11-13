@@ -1,0 +1,115 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  annotations:
+    kubevirt.io/latest-observed-api-version: v1
+    kubevirt.io/storage-observed-api-version: v1
+  finalizers:
+  - kubevirt.io/virtualMachineControllerFinalize
+  generation: 3
+  labels:
+    cloud-init.kubevirt-manager.io/username: jake
+    fw.kubevirt-manager.io/vm-name: microk8s
+    k8s.v1.cni.cncf.io/networks: br0.20
+    kubevirt-manager.io/managed: "true"
+    kubevirt.io/domain: microk8s
+  name: microk8s
+  namespace: default
+spec:
+  instancetype:
+    kind: VirtualMachineClusterInstancetype
+    name: large
+  dataVolumeTemplates:
+  - metadata:
+      name: microk8s-jammy
+    spec:
+      storage:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 25G
+        storageClassName: microk8s-hostpath
+      source:
+        http:
+          url: https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img 
+  running: true
+  template:
+    metadata:
+      labels:
+        cloud-init.kubevirt-manager.io/username: jake
+        fw.kubevirt-manager.io/vm-name: microk8s
+        k8s.v1.cni.cncf.io/networks: br0.20
+        kubevirt-manager.io/managed: "true"
+        kubevirt.io/domain: microk8s
+    spec:
+      architecture: amd64
+      domain:
+        devices:
+          disks:
+          - disk: {}
+            name: disk1
+          - disk:
+              bus: virtio
+            name: disk3
+          interfaces:
+          - bridge: {}
+            name: net1
+          networkInterfaceMultiqueue: true
+        firmware:
+          bootloader:
+            bios: {}
+        machine:
+          type: q35
+        resources: {}
+      networks:
+      - multus:
+          networkName: br0.20
+        name: net1
+      nodeSelector:
+        kubernetes.io/hostname: blossom
+      priorityClassName: vm-standard
+      volumes:
+      - dataVolume:
+          name: microk8s-jammy
+        name: disk1
+      - cloudInitNoCloud:
+          networkData: |
+            version: 1
+            config:
+                - type: physical
+                  name: enp1s0
+                  subnets:
+                  - type: dhcp
+                - type: nameserver
+                  address:
+                  - '10.10.0.1'
+                  - '8.8.8.8'
+                  - '8.8.4.4'
+          userData: |
+            #cloud-config
+            manage_etc_hosts: true
+            hostname: microk8s
+            ssh_pwauth: true
+            chpasswd:
+              expire: false
+              users:
+                - {name: jake, password: Passw0rd, type: text}
+            users:
+              - name: jake
+                lock_passwd: false
+                sudo: ALL=(ALL) NOPASSWD:ALL
+                shell: /bin/bash
+                ssh_import_id:
+                  - lp:slapcat
+                plain_text_passwd: Passw0rd
+            package_update: true
+            package_upgrade: false
+            packages:
+              - qemu-guest-agent
+            runcmd:
+              - snap install microk8s --classic --channel=1.32/stable
+              - /snap/bin/microk8s status --wait-ready
+              - /snap/bin/microk8s enable hostpath-storage
+              - /snap/bin/microk8s enable ingress
+        name: disk3

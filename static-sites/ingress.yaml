@@ -1,0 +1,61 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: static-sites
+spec:
+  tls:
+    - hosts:
+        - sashcustoms.com
+      secretName: sashcustoms.com
+    - hosts:
+        - jake.nabasny.com
+      secretName: jake.nabasny.com
+    - hosts:
+        - gutenberg.nabasny.com
+      secretName: gutenberg.nabasny.com
+    - hosts:
+        - wiki.nabasny.com
+      secretName: wiki.nabasny.com
+  rules:
+    - host: sashcustoms.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: static-sites
+                port:
+                  number: 80
+    - host: jake.nabasny.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: static-sites
+                port:
+                  number: 80      
+    - host: gutenberg.nabasny.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: static-sites
+                port:
+                  number: 80
+    - host: wiki.nabasny.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: static-sites
+                port:
+                  number: 80

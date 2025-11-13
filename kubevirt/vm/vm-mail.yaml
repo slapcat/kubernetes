@@ -1,0 +1,63 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  labels:
+    kubevirt.io/os: linux
+  name: mail
+  namespace: vm
+spec:
+  instancetype:
+    kind: VirtualMachineClusterInstancetype
+    name: tiny-1cpu-2mem
+  dataVolumeTemplates:
+  - metadata:
+      name: mail
+    spec:
+      pvc:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: ceph-rbd
+      source:
+        http:
+          url: "https://cdimage.debian.org/images/cloud/trixie/daily/latest/debian-13-generic-amd64-daily.qcow2"
+  runStrategy: Always
+  template:
+    metadata:
+      labels:
+        kubevirt.io/domain: mail.nabasny.com
+    spec:
+      networks:
+      - multus:
+          networkName: br0.20
+        name: lan
+          #      - name: cni
+        #        pod: {}
+      domain:
+        devices:
+          disks:
+          - disk:
+              bus: virtio
+            name: root
+          - disk:
+              bus: virtio
+              readonly: true
+            name: cloudinitdisk
+          interfaces:
+          - bridge: {}
+            name: lan
+              #          - bridge: {}
+              #name: cni
+          networkInterfaceMultiqueue: true
+        machine:
+          type: q35
+      volumes:
+      - dataVolume:
+          name: mail
+        name: root
+      - name: cloudinitdisk
+        cloudInitNoCloud:
+          secretRef:
+            name: cloudinit

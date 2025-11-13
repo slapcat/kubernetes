@@ -1,0 +1,10 @@
+apiVersion: kubevirt-manager.io/v1
+kind: Image
+metadata:
+  name: jammy
+  namespace: default
+spec:
+  http:
+    url: https://cloud-images.ubuntu.com/jammy/20241217/jammy-server-cloudimg-amd64.img
+  readableName: jammy
+  type: http

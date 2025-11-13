@@ -1,0 +1,12 @@
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  name: "debian"
+spec:
+  storage:
+    resources:
+      requests:
+        storage: 10Gi
+  source:
+    http:
+      url: "https://cdimage.debian.org/images/cloud/bookworm/20241201-1948/debian-12-nocloud-amd64-20241201-1948.raw"

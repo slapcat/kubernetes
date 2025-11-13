@@ -1,0 +1,45 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft-securitycraft01
+  labels:
+    app: minecraft-securitycraft01
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minecraft-securitycraft01
+  template:
+    metadata:
+      labels:
+        app: minecraft-securitycraft01
+    spec:
+      containers:
+      - name: minecraft
+        image: itzg/minecraft-bedrock-server
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1Gi
+        env:
+        - name: EULA
+          value: "TRUE"
+        - name: GAMEMODE
+          value: "creative"
+        - name: DIFFICULTY
+          value: "normal"
+        - name: SERVER_NAME
+          value: "JS Security Mod"
+        - name: OPS
+          value: "slapcat00"
+        - name: VIEW_DISTANCE
+          value: "128"
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: minecraft-securitycraft01

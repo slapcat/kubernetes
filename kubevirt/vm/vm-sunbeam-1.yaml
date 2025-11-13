@@ -1,0 +1,89 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  labels:
+    kubevirt.io/os: linux
+  name: sunbeam-1
+  namespace: vm
+spec:
+  instancetype:
+    kind: VirtualMachineClusterInstancetype
+    name: 2xlarge
+  dataVolumeTemplates:
+  - metadata:
+      name: sunbeam-1
+    spec:
+      pvc:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 120Gi
+        storageClassName: microk8s-hostpath
+      source:
+        http:
+          url: "https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img"
+  - metadata:
+      name: sunbeam-data-1
+    spec:
+      pvc:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 500Gi
+        storageClassName: ceph-rbd
+      source:
+        blank: {}
+  runStrategy: Always
+  template:
+    metadata:
+      labels:
+        kubevirt.io/domain: sunbeam-1.lan
+    spec:
+      hostname: "sunbeam-1"
+      networks:
+      - multus:
+          networkName: br0.20
+        name: lan
+      - multus:
+          networkName: br0.20
+        name: lan2
+      domain:
+        devices:
+          disks:
+          - disk:
+              bus: virtio
+            name: root
+          - disk:
+              bus: virtio
+            name: data
+          - disk:
+              bus: virtio
+              readonly: true
+            name: cloudinitdisk
+          - disk:
+            name: scripts
+            serial: CVLY623300HK240D
+          interfaces:
+          - bridge: {}
+            name: lan
+          - bridge: {}
+            name: lan2
+          networkInterfaceMultiqueue: true
+        machine:
+          type: q35
+      volumes:
+      - dataVolume:
+          name: sunbeam-1
+        name: root
+      - dataVolume:
+          name: sunbeam-data-1
+        name: data
+      - configMap:
+          name: sunbeam
+        name: scripts
+      - name: cloudinitdisk
+        cloudInitNoCloud:
+          secretRef:
+            name: cloudinit-sunbeam

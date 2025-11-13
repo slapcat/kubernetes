@@ -1,0 +1,45 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft 
+  labels:
+    app: minecraft
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minecraft
+  template:
+    metadata:
+      labels:
+        app: minecraft
+    spec:
+      containers:
+      - name: minecraft
+        image: itzg/minecraft-bedrock-server
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1Gi
+        env:
+        - name: EULA
+          value: "TRUE"
+        - name: GAMEMODE
+          value: "survival"
+        - name: DIFFICULTY
+          value: "normal"
+        - name: SERVER_NAME
+          value: "Jake & Sloane's World"
+        - name: OPS
+          value: "slapcat00"
+        - name: VIEW_DISTANCE
+          value: "64"
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: minecraft

@@ -1,0 +1,15 @@
+#cloud-config
+manage_etc_hosts: true
+users:
+- name: jake
+  sudo: ALL=(ALL) NOPASSWD:ALL
+  shell: /bin/bash
+  ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDJdQSBJjthobgJMzseilGkUS/GNEpoppRMIOLvhdQexGCLyYLJyWksefGgcBN88jpI7G3lC2oc7IxtooDOucReBKVk2PMwYesOv4Q8HqaEsSVKlD+C5ylxl3sUP9WiHeDV7Q36D3H0A/5b6CwxWdxEnuR4eAdEGJ1L90H1F4KIAC+Ht2T/mFlC2Nt/82DAR/Jt9oBYoGE9LBOzC48kYipBgeyf8k1wkbONrF9md83HTk7Xf64TVI230Z+4PjCVB3BCIv9HJtc0qZgBA3cOeODPJRld18h1e/5XaQJsTY+Oql6kJRc0MaJFyqFc/Rub3txx2yP94DIDrdzFR9MFtYlrrvmkTzw/VM+ljiPvYkujrxxM9oHDrS23TyWWWkgKaWnSNHQnYXShZGIdWXfnhd112rvxnq3j0oCaErB8X6Hg4rKIKMb2nrIBIHfKmEm7Eod4hUsRaVL5tPCjPWL7iwWTLvKPWiX8vNiw6Kwn5EvcTzMXDYFYvAx3qPNVIj1/1Dk= jake@bebop 
+package_update: true
+package_upgrade: false
+packages:
+- qemu-guest-agent
+- htop
+runcmd:
+- systemctl enable --now qemu-guest-agent.service

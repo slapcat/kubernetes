@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: apache
+data:
+  00-default.conf: |-
+    <VirtualHost *:80>
+      ServerName nabasny.com
+      ServerAlias www.nabasny.com
+      ServerAdmin jake@nabasny.com
+      DocumentRoot /var/www/html/nabasny
+    </VirtualHost>
+    <VirtualHost *:80>
+      ServerName dl.nabasny.com
+      ProxyPreserveHost On
+      ProxyPass / http://10.10.1.80:5055/
+      ProxyPassReverse / http://10.10.1.80:5055/
+    </VirtualHost>
+    <VirtualHost *:80>
+      ServerName gutenberg.nabasny.com
+      ServerAdmin jake@nabasny.com
+      DocumentRoot /var/www/html/gutenberg
+        <Directory "/var/www/html/gutenberg">
+          AllowOverride All
+          Options +Indexes +FollowSymLinks
+          Require all granted
+        </Directory>
+    </VirtualHost>
+    <VirtualHost *:80>
+      ServerName jake.nabasny.com
+      ServerAdmin jake@nabasny.com
+      DocumentRoot /var/www/html/jake/_site
+    </VirtualHost>
+    <VirtualHost *:80>
+      ServerName sashcustoms.com
+      ServerAdmin jake@nabasny.com
+      DocumentRoot /var/www/html/sashcustoms
+    </VirtualHost>
+    <VirtualHost *:80>
+      ProxyPreserveHost On
+      ProxyRequests Off
+      ServerAdmin jake@nabasny.com
+      DocumentRoot /var/www/html/wiki/site
+      ServerName wiki.nabasny.com
+    </VirtualHost>
+    <VirtualHost *:80>
+      ServerName zurita.nabasny.com
+      ProxyPreserveHost On
+      ProxyPass / http://10.10.1.50/
+      ProxyPassReverse / http://10.10.1.50/
+    </VirtualHost>

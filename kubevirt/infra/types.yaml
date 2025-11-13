@@ -1,0 +1,68 @@
+apiVersion: v1
+items:
+- apiVersion: instancetype.kubevirt.io/v1beta1
+  kind: VirtualMachineClusterInstancetype
+  metadata:
+    name: large-4cpu-16mem
+  spec:
+    cpu:
+      guest: 4
+    memory:
+      guest: 16Gi
+- apiVersion: instancetype.kubevirt.io/v1beta1
+  kind: VirtualMachineClusterInstancetype
+  metadata:
+    name: medium-4cpu-8mem
+  spec:
+    cpu:
+      guest: 4
+    memory:
+      guest: 8Gi
+- apiVersion: instancetype.kubevirt.io/v1beta1
+  kind: VirtualMachineClusterInstancetype
+  metadata:
+    name: small-2cpu-4mem
+  spec:
+    cpu:
+      guest: 2
+    memory:
+      guest: 4Gi
+- apiVersion: instancetype.kubevirt.io/v1beta1
+  kind: VirtualMachineClusterInstancetype
+  metadata:
+    name: xlarge-8cpu-32mem
+  spec:
+    cpu:
+      guest: 8
+    memory:
+      guest: 32Gi
+- apiVersion: instancetype.kubevirt.io/v1beta1
+  kind: VirtualMachineClusterInstancetype
+  metadata:
+    name: 2xlarge
+  spec:
+    cpu:
+      guest: 12
+    memory:
+      guest: 64Gi
+- apiVersion: instancetype.kubevirt.io/v1beta1
+  kind: VirtualMachineClusterInstancetype
+  metadata:
+    name: micro-1cpu-1mem
+  spec:
+    cpu:
+      guest: 1
+    memory:
+      guest: 1Gi
+- apiVersion: instancetype.kubevirt.io/v1beta1
+  kind: VirtualMachineClusterInstancetype
+  metadata:
+    name: tiny-1cpu-2mem
+  spec:
+    cpu:
+      guest: 1
+    memory:
+      guest: 2Gi
+kind: List
+metadata:
+  resourceVersion: ""

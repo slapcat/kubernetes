@@ -1,0 +1,23 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: dl
+spec:
+  tls:
+    - hosts:
+        - dl.nabasny.com
+      secretName: dl.nabasny.com
+  rules:
+    - host: dl.nabasny.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: torrents
+                port:
+                  number: 80

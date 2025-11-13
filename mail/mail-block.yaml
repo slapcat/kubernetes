@@ -1,0 +1,20 @@
+---
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  annotations:
+    cdi.kubevirt.io/storage.deleteAfterCompletion: "false"
+    cdi.kubevirt.io/storage.usePopulator: "true"
+  name: mail-block
+  namespace: vm
+spec:
+  pvc:
+    volumeMode: Block
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 10Gi
+    storageClassName: ceph-rbd
+  source:
+    blank: {}

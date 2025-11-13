@@ -1,0 +1,39 @@
+---
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  annotations:
+    cdi.kubevirt.io/storage.deleteAfterCompletion: "false"
+    cdi.kubevirt.io/storage.usePopulator: "true"
+  name: mail-root
+  namespace: vm
+spec:
+  pvc:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 5Gi
+    storageClassName: ceph-rbd
+  source:
+    http:
+      url: https://cdimage.debian.org/images/cloud/trixie/daily/latest/debian-13-generic-amd64-daily.raw
+---
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  annotations:
+    cdi.kubevirt.io/storage.deleteAfterCompletion: "false"
+    cdi.kubevirt.io/storage.usePopulator: "true"
+  name: maildir
+  namespace: vm
+spec:
+  pvc:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 15Gi
+    storageClassName: ceph-rbd
+  source:
+    blank: {}

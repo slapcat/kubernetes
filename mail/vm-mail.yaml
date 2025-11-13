@@ -1,0 +1,110 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  finalizers:
+  - kubevirt.io/virtualMachineControllerFinalize
+  labels:
+    cloud-init.kubevirt-manager.io/username: jake
+    fw.kubevirt-manager.io/vm-name: mail
+    k8s.v1.cni.cncf.io/networks: br0.20
+    kubevirt-manager.io/managed: "true"
+    kubevirt.io/domain: mail
+  name: mail
+  namespace: vm
+spec:
+  runStrategy: Always
+  instancetype:
+    kind: VirtualMachineClusterInstancetype
+    name: small-2cpu-4mem
+  template:
+    metadata:
+      labels:
+        cloud-init.kubevirt-manager.io/username: jake
+        fw.kubevirt-manager.io/vm-name: mail
+        k8s.v1.cni.cncf.io/networks: br0.20
+        kubevirt-manager.io/managed: "true"
+        kubevirt.io/domain: mail
+    spec:
+      architecture: amd64
+      domain:
+        devices:
+          disks:
+          - disk: {}
+            name: disk0
+          - disk: {}
+            name: mail-block
+          - disk:
+              bus: virtio
+            name: cloudinitdisk
+          interfaces:
+          - bridge: {}
+            name: net0
+          networkInterfaceMultiqueue: true
+        machine:
+          type: q35
+        resources: {}
+      networks:
+      - multus:
+          networkName: vm/br0.20
+        name: net0
+      priorityClassName: vm-standard
+      volumes:
+      - dataVolume:
+          name: mail-block
+        name: mail-block
+      - dataVolume:
+          name: mail-root
+        name: disk0
+      - cloudInitNoCloud:
+          userData: |
+            #cloud-config
+            package_update: true
+            package_upgrade: true
+            packages:
+              - htop
+              - ranger
+              - postfix
+              - dovecot-core
+              - dovecot-imapd
+              - dovecot-lmtpd
+              - dovecot-ldap
+              - dovecot-sieve
+              - fail2ban
+              - spamass-milter
+              - spamassassin
+              - promtheus-postfix-exporter
+              - postfix-policyd-spf-python
+              - libsasl2-modules
+              - qemu-guest-agent
+            ssh_pwauth: true
+            disable_root: false
+            chpasswd:
+              expire: false
+              users:
+                - name: root
+                  password: root
+                  type: text
+            users:
+                - default
+                - name: root
+                  lock_passwd: false
+                - name: jake
+                  ssh_authorized_keys:
+                    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDJdQSBJjthobgJMzseilGkUS/GNEpoppRMIOLvhdQexGCLyYLJyWksefGgcBN88jpI7G3lC2oc7IxtooDOucReBKVk2PMwYesOv4Q8HqaEsSVKlD+C5ylxl3sUP9WiHeDV7Q36D3H0A/5b6CwxWdxEnuR4eAdEGJ1L90H1F4KIAC+Ht2T/mFlC2Nt/82DAR/Jt9oBYoGE9LBOzC48kYipBgeyf8k1wkbONrF9md83HTk7Xf64TVI230Z+4PjCVB3BCIv9HJtc0qZgBA3cOeODPJRld18h1e/5XaQJsTY+Oql6kJRc0MaJFyqFc/Rub3txx2yP94DIDrdzFR9MFtYlrrvmkTzw/VM+ljiPvYkujrxxM9oHDrS23TyWWWkgKaWnSNHQnYXShZGIdWXfnhd112rvxnq3j0oCaErB8X6Hg4rKIKMb2nrIBIHfKmEm7Eod4hUsRaVL5tPCjPWL7iwWTLvKPWiX8vNiw6Kwn5EvcTzMXDYFYvAx3qPNVIj1/1Dk= jake@bebop
+                  groups: sudo
+                  shell: /bin/bash
+            write_files:
+              - content: |
+                  # managed by cloud-init
+                  ethernets:
+                    enp1s0:
+                      dhcp4: true
+                      match:
+                        name: en*
+                      set-name: enp1s0
+                path: /etc/netplan/00-default.yaml
+                permissions: '0600'
+            runcmd:
+              - sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+              - systemctl restart sshd
+        name: cloudinitdisk

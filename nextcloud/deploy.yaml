@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nextcloud
+  name: nextcloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextcloud
+  template:
+    metadata:
+      labels:
+        app: nextcloud
+    spec:
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: nextcloud-pvc
+      - name: apps
+        persistentVolumeClaim:
+          claimName: nextcloud-apps-pvc
+      - name: config
+        persistentVolumeClaim:
+          claimName: nextcloud-conf-pvc
+      - name: redis-data
+        persistentVolumeClaim:
+          claimName: redis-pvc
+      - name: certs
+        secret:
+          secretName: box.nabasny.com
+      containers:
+      - image: ghcr.io/slapcat/nextcloud:latest
+        name: nextcloud
+        volumeMounts:
+        - mountPath: "/var/www/html/nextcloud/data"
+          name: data
+        - mountPath: "/var/www/html/nextcloud/config"
+          name: config
+        - mountPath: "/var/www/html/nextcloud/custom_apps"
+          name: apps
+        - mountPath: "/etc/ssl/nextcloud"
+          name: certs
+      - name: redis
+        image: redis:latest
+        volumeMounts:
+        - mountPath: "/data"
+          name: redis-data
+        ports:
+        - containerPort: 6379
