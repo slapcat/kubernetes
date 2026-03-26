@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 		dirmngr \
 		ssl-cert \
 		ca-certificates \
-		libmagickcore-6.q16-6-extra
+		libmagickcore-7.q16-10-extra
 
 ENV CLI_INI_DIR /etc/php/8.4/cli/conf.d
 ENV APACHE_INI_DIR /etc/php/8.4/apache2/conf.d
