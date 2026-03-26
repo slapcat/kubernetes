@@ -16,17 +16,17 @@ jobs:
       contents: read
       packages: write
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - name: Build apache
       run: docker build . --file images/apache-php/Dockerfile --tag ghcr.io/slapcat/apache-php:latest
     - name: Build apache-trixie
       run: docker build . --file images/apache-php-trixie/Dockerfile --tag ghcr.io/slapcat/apache-php:trixie
     - name: Build nextcloud-32
-      run: docker build . --file images/nextcloud-latest/Dockerfile --tag ghcr.io/slapcat/nextcloud:32.0.6
+      run: docker build . --file images/nextcloud-32.0.6/Dockerfile --tag ghcr.io/slapcat/nextcloud:32.0.6
     - name: Build nextcloud-31
       run: docker build . --file images/nextcloud-31.0.9/Dockerfile --tag ghcr.io/slapcat/nextcloud:31.0.9
     - name: Login to GitHub Container Registry
-      uses: docker/login-action@v2
+      uses: docker/login-action@v4
       with:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
