@@ -16,8 +16,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    metallb.universe.tf/loadBalancerIPs: 10.10.1.115
   name: guacamole
   namespace: guacamole
 spec:
