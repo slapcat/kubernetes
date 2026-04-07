@@ -1,5 +1,9 @@
 # namespaces
 kubectl create ns guacamole
+kubectl create namespace argocd
+
+# argocd
+kubectl apply -n argocd --server-side --force-conflicts -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
 # repos
 #helm repo add external-secrets https://charts.external-secrets.io
