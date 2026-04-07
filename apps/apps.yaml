@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/slapcat/kubernetes
-    path: argocd/apps
+    path: apps
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
