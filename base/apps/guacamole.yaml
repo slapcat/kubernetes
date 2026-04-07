@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd
+  name: guacamole
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/slapcat/kubernetes
-    path: argocd
+    path: apps/guacamole
     targetRevision: HEAD
     directory:
       recurse: false
@@ -22,4 +22,3 @@ spec:
       enabled: true
     syncOptions:
       - CreateNamespace=true
-      - ServerSideApply=true

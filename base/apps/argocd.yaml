@@ -1,14 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: apps
+  name: argocd
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/slapcat/kubernetes
-    path: apps
+    path: base/argocd
     targetRevision: HEAD
+    directory:
+      recurse: false
+      jsonnet: {}
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
@@ -17,3 +20,6 @@ spec:
       prune: true
       selfHeal: true
       enabled: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
