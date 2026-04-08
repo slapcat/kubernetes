@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: apps-appset
+  name: base-appset
   namespace: argocd
 spec:
   goTemplate: true
@@ -11,10 +11,11 @@ spec:
       repoURL: https://github.com/slapcat/kubernetes.git
       revision: HEAD
       directories:
-      - path: apps/*
+      - path: base/*
   template:
     metadata:
       name: '{{.path.basename}}'
+      namespace: argocd
     spec:
       project: default
       source:
@@ -23,6 +24,7 @@ spec:
         path: '{{.path.path}}'
       destination:
         server: https://kubernetes.default.svc
+        name: '{{.path.basename}}'
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
