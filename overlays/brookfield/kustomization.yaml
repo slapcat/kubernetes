@@ -3,9 +3,7 @@ kind: Kustomization
 
 resources:
 - ../../base
-#- ../../apps/guacamole
+- appset.yaml
 
 patches:
-#- path: guacamole.yaml
 - path: argocd.yaml
-- path: appset.yaml
