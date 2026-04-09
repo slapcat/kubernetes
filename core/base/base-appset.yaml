@@ -14,7 +14,7 @@ spec:
       - path: base/*
   template:
     metadata:
-      name: '{{.path.basename}}'
+      name: '{{index .path.segments 1}}'
       namespace: argocd
     spec:
       project: default
@@ -24,7 +24,6 @@ spec:
         path: '{{.path.path}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{.path.basename}}'
       syncPolicy:
         syncOptions:
           - CreateNamespace=true

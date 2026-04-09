@@ -1,0 +1,10 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: base-appset
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      directories:
+      - path: base/*/overlays/prod

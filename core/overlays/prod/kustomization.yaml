@@ -4,4 +4,8 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-- install.yaml
+  - ../../base
+
+patches:
+  - path: base-appset.yaml
+  - path: apps-appset.yaml
