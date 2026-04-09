@@ -3,3 +3,5 @@ resources:
 
 patches:
   - path: app.yaml
+  - path: base-appset.yaml
+  - path: apps-appset.yaml

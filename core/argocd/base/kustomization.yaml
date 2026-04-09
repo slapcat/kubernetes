@@ -4,3 +4,5 @@ kind: Kustomization
 resources:
 - install.yaml
 - app.yaml
+- base-appset.yaml
+- apps-appset.yaml
