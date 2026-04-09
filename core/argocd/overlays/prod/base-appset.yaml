@@ -6,5 +6,7 @@ metadata:
 spec:
   generators:
   - git:
+      repoURL: https://github.com/slapcat/kubernetes.git
+      revision: HEAD
       directories:
       - path: base/*/overlays/prod
