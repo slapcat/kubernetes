@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/slapcat/kubernetes
-    path: core/install.yaml
+    path: core/base/install.yaml
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
