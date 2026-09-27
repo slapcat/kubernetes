@@ -6,7 +6,10 @@ resources:
 - svc.yaml
 - route.yaml
 
-#secretGenerator:
-#- name: guacamole
-#  envs:
-#  - secrets/env
+secretGenerator:
+- name: guacamole
+  envs:
+  - secrets/env
+ 
+generatorOptions:
+  disableNameSuffixHash: true
