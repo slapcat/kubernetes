@@ -1,0 +1,12 @@
+namespace: guacamole
+
+resources:
+- deploy-guacamole.yaml
+- deploy-guacd.yaml
+- svc.yaml
+- route.yaml
+
+secretGenerator:
+- name: guacamole
+  envs:
+  - secrets/env

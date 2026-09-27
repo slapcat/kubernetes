@@ -3,7 +3,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: guacd
-  namespace: guacamole
 spec:
   replicas: 1
   selector:
@@ -17,13 +16,3 @@ spec:
       containers:
       - name: guacd
         image: guacamole/guacd:latest
-        volumeMounts:
-        - name: drive
-          mountPath: /drive
-        - name: record
-          mountPath: /record
-      volumes:
-      - name: drive
-        emptyDir: {}
-      - name: record
-        emptyDir: {}

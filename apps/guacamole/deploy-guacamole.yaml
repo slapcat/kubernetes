@@ -3,7 +3,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: guacamole
-  namespace: guacamole
 spec:
   replicas: 1
   selector:
@@ -25,14 +24,11 @@ spec:
         - name: OPENID_ENABLED
           value: "true"
         - name: EXTENSION_PRIORITY
-          value: "openid"
+          value: "*,openid"
+        - name: RDP_GFX_YUV420
+          value: "true"
+        - name: RDP_GFX_H264
+          value: "true"
         envFrom:
         - secretRef:
             name: guacamole
-        volumeMounts:
-        - name: drive
-          mountPath: /drive
-      volumes:
-      - name: drive
-        persistentVolumeClaim:
-          claimName: guacamole
