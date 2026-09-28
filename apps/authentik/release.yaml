@@ -9,13 +9,13 @@ spec:
   timeout: 5m
   chart:
     spec:
-      chart: authentik
+      chart: authentik-2025.8.3
       version: '2025.8.3'
       sourceRef:
         kind: HelmRepository
         name: authentik
       interval: 5m
-  releaseName: authentik-2025.8.3
+  releaseName: authentik
   values:
     authentik:
       existingSecret:
