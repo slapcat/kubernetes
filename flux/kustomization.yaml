@@ -3,5 +3,4 @@ namespace: flux-system
 resources:
 - gotk-components.yaml
 - source.yaml
-- helm-authentik.yaml
 - guacamole.yaml

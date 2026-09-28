@@ -2,4 +2,5 @@ namespace: authentik
 
 resources:
 - route.yaml
+- repo.yaml
 - release.yaml
