@@ -3,7 +3,6 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: guacamole
-  namespace: flux-system
 spec:
   interval: 30m0s
   targetNamespace: guacamole
@@ -13,5 +12,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: kubernetes
+    namespace: flux-system
   timeout: 3m0s
   wait: true
