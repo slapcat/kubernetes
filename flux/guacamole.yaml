@@ -3,6 +3,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: guacamole
+  namespace: guacamole
 spec:
   interval: 30m0s
   path: ./apps/guacamole
