@@ -9,7 +9,7 @@ spec:
   timeout: 5m
   chart:
     spec:
-      chart: authentik-2025.8.3
+      chart: authentik
       version: '2025.8.3'
       sourceRef:
         kind: HelmRepository
