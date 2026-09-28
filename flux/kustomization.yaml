@@ -1,4 +1,3 @@
 resources:
-- gotk-components.yaml
 - source.yaml
 - guacamole.yaml

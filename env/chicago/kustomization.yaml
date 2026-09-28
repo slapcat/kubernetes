@@ -1,4 +1,4 @@
 resources:
-- ../../flux/
+- flux-system
 - ../../apps/guacamole
 - ../../apps/authentik
