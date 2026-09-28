@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: authentik
-      version: '2025.8.3'
+      version: '2025.10.3'
       sourceRef:
         kind: HelmRepository
         name: authentik
@@ -22,6 +22,4 @@ spec:
         error_reporting:
             enabled: false
     postgresql:
-        enabled: true
-    redis:
         enabled: true
