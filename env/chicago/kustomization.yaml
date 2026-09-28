@@ -1,5 +1,4 @@
 resources:
 - ../../flux/
-- chicago.yaml
 - ../../apps/guacamole
 #- ../../apps/authentik
