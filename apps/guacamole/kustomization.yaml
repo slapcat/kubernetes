@@ -1,6 +1,7 @@
 namespace: guacamole
 
 resources:
+- flux.yaml
 - deploy-guacamole.yaml
 - deploy-guacd.yaml
 - svc.yaml
