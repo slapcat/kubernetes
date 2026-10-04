@@ -20,7 +20,7 @@ jobs:
     - name: Build php
       run: docker build . --file images/php/Dockerfile --tag ghcr.io/slapcat/php:latest
     - name: Build rsync
-        run: docker build . --file images/rsync/Dockerfile --tag ghcr.io/slapcat/rsync:latest
+      run: docker build . --file images/rsync/Dockerfile --tag ghcr.io/slapcat/rsync:latest
 
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v4
@@ -32,4 +32,4 @@ jobs:
     - name: Push php
       run: docker push ghcr.io/slapcat/php:latest
     - name: Push rsync
-        run: docker push ghcr.io/slapcat/rsync:latest
+      run: docker push ghcr.io/slapcat/rsync:latest
