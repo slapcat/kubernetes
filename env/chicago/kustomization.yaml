@@ -2,3 +2,7 @@ resources:
 - flux-system
 - ../../apps/guacamole
 - ../../apps/authentik
+- ../../apps/rustdesk
+
+patches:
+  - path: rustdesk.yaml
