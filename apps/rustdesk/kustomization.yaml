@@ -1,2 +1,5 @@
+namespace: rustdesk
+
 resources:
+  - flux.yaml
   - rustdesk.yaml
