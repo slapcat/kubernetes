@@ -1,6 +1,7 @@
 name: K8s Image CI
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "main" ]
     paths:
