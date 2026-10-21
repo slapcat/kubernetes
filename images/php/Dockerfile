@@ -13,7 +13,7 @@ RUN apt-get update \
             libmagickcore-7.q16-10-extra \
         && wget -O /usr/bin/install-php-extensions https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions \
         && chmod +x /usr/bin/install-php-extensions \
-        && install-php-extensions apcu bcmath bz2 ldap gd gmp imagick intl memcached mysqli redis soap zip \
+        && install-php-extensions apcu bcmath bz2 ldap gd gmp intl memcached mysqli redis soap zip \
         && a2enmod headers proxy proxy_http rewrite remoteip ssl
 
 
