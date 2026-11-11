@@ -115,9 +115,34 @@ kind: PersistentVolumeClaim
 metadata:
   name: box-mods
 spec:
-  storageClassName: ceph-rbd
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 4Mi
+  storageClassName: ""
+  volumeMode: Filesystem
+  volumeName: box-conf
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: box-mods
+spec:
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: 4Mi
+  csi:
+    driver: rook-ceph.cephfs.csi.ceph.com
+    nodeStageSecretRef:
+      name: rook-csi-cephfs-node
+      namespace: rook-ceph-external
+    volumeAttributes:
+      "fsName": "nabasny"
+      "clusterID": "rook-ceph-external"
+      "staticVolume": "true"
+      "rootPath": "/nextcloud/mods-enabled"
+    volumeHandle: box-mods
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
