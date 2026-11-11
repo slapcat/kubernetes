@@ -1,4 +1,5 @@
 resources:
+- flux.yaml
 - flux-system
 - ../../apps/guacamole
 - ../../apps/authentik
