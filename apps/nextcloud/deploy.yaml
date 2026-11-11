@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   labels:
     app: nextcloud
-  name: nextcloud
+  name: box
 spec:
   replicas: 1
   selector:
@@ -18,35 +18,70 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: nextcloud-pvc
+          claimName: box
+      - name: conf
+        persistentVolumeClaim:
+          claimName: box-conf
       - name: apps
         persistentVolumeClaim:
-          claimName: nextcloud-apps-pvc
-      - name: config
-        persistentVolumeClaim:
-          claimName: nextcloud-conf-pvc
-      - name: redis-data
-        persistentVolumeClaim:
-          claimName: redis-pvc
+          claimName: box-apps
       - name: certs
         secret:
-          secretName: box.nabasny.com
+          secretName: box
+      - name: ssl
+        configMap:
+          name: box-ssl
+      - name: box-mods
+        persistentVolumeClaim:
+          claimName: box-mods
+      - name: box-remoteip
+        configMap:
+          name: box-remoteip
       containers:
-      - image: ghcr.io/slapcat/nextcloud:latest
-        name: nextcloud
+      - image: nextcloud:33-apache
+        imagePullPolicy: Always
+        name: box
+        env:
+        - name: NEXTCLOUD_DATA_DIR
+          value: "/var/www/nextcloud"
+        - name: NEXTCLOUD_INIT_HTACCESS
+          value: "true"
+        - name: PHP_MEMORY_LIMIT
+          value: "-1"
+        - name: PHP_UPLOAD_LIMIT
+          value: "16G"
+        - name: PHP_OPCACHE_MEMORY_CONSUMPTION
+          value: "-1"
+        - name: APACHE_BODY_LIMIT
+          value: "17179869184"
+        - name: TRUSTED_PROXIES
+          value: "10.0.0.0/8 box.nabasny.com"
+        - name: FORWARDED_FOR_HEADERS
+          value: "X-Forwarded-For"
+        - name: MYSQL_DATABASE
+          value: nextcloud
+        - name: MYSQL_HOST
+          value: mariadb
+        - name: MYSQL_USER
+          value: root
         volumeMounts:
-        - mountPath: "/var/www/html/nextcloud/data"
+        - mountPath: "/var/www/nextcloud"
           name: data
-        - mountPath: "/var/www/html/nextcloud/config"
-          name: config
-        - mountPath: "/var/www/html/nextcloud/custom_apps"
+        - mountPath: "/var/www/html/config"
+          name: conf
+        - mountPath: "/var/www/html/custom_apps"
           name: apps
         - mountPath: "/etc/ssl/nextcloud"
           name: certs
+        - mountPath: "/etc/apache2/sites-enabled/default-ssl.conf"
+          name: ssl
+          subPath: default-ssl.conf
+        - mountPath: "/etc/apache2/mods-enabled"
+          name: box-mods
+        - mountPath: "/etc/apache2/conf-enabled/remoteip.conf"
+          name: box-remoteip
+          subPath: "remoteip.conf"
       - name: redis
         image: redis:latest
-        volumeMounts:
-        - mountPath: "/data"
-          name: redis-data
         ports:
         - containerPort: 6379

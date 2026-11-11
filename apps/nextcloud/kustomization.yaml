@@ -1,0 +1,11 @@
+resources:
+- flux.yaml
+- backendTLSPolicy.yaml
+- cm-remoteip.yaml
+- cm-ssl.yaml
+- cron.yaml
+- deploy.yaml
+- pv.yaml
+- route.yaml
+- sa.yaml
+- svc.yaml

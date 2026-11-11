@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nextcloud-cron
+spec:
+  schedule: "*/10 * * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 120
+      template:
+        spec:
+          serviceAccountName: nextcloud-cron
+          containers:
+          - image: alpine/kubectl
+            imagePullPolicy: Always
+            name: kubectl
+            command:
+            - /bin/sh
+            - -c
+            - |
+              kubectl exec -n default deploy/box -- apt update
+              kubectl exec -n default deploy/box -- apt install sudo -y
+              kubectl exec -n default deploy/box -- sudo -u www-data php -d memory_limit=512M -f cron.php -- --verbose
+          restartPolicy: OnFailure

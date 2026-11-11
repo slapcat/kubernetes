@@ -1,0 +1,12 @@
+apiVersion: v1
+data:
+  default-ssl.conf: |
+    <VirtualHost *:443>
+      DocumentRoot /var/www/html
+      SSLEngine on
+      SSLCertificateFile      /etc/ssl/nextcloud/tls.crt
+      SSLCertificateKeyFile   /etc/ssl/nextcloud/tls.key
+    </VirtualHost>
+kind: ConfigMap
+metadata:
+  name: box-ssl
