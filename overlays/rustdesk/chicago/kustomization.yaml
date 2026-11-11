@@ -1,6 +1,6 @@
 resources:
   - flux.yaml
-  - ../../../apps/rustdesk/base
+  - ../../../apps/rustdesk
 
 patches:
   - path: rustdesk.yaml
