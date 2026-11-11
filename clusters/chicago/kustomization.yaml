@@ -1,8 +1,7 @@
 resources:
-- flux.yaml
 - flux-system
 - ../../apps/guacamole
 - ../../apps/authentik
 - ../../apps/mariadb
 - ../../apps/nextcloud
-  #- ../../overlays/rustdesk/chicago
+- ../../overlays/rustdesk/chicago
