@@ -122,7 +122,7 @@ spec:
       storage: 4Mi
   storageClassName: ""
   volumeMode: Filesystem
-  volumeName: box-conf
+  volumeName: box-mods
 ---
 apiVersion: v1
 kind: PersistentVolume
