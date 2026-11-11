@@ -6,9 +6,8 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m0s
-  targetNamespace: rustdesk
   path: ./overlays/rustdesk/chicago
-  prune: false
+  prune: true
   retryInterval: 2m0s
   sourceRef:
     kind: GitRepository
