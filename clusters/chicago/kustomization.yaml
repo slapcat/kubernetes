@@ -1,0 +1,8 @@
+resources:
+- flux-system
+- ../../apps/guacamole
+- ../../apps/authentik
+- ../../apps/mariadb
+- ../../apps/nextcloud
+- ../../overlays/rustdesk/chicago
+

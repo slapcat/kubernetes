@@ -1,0 +1,14 @@
+apiVersion: gateway.nginx.org/v1alpha1
+kind: SnippetsPolicy
+metadata:
+  name: hsts
+  namespace: nginx-gateway
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: http
+  snippets:
+    - context: http
+      value: |
+        add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;

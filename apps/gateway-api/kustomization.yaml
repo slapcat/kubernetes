@@ -1,0 +1,8 @@
+resources:
+- flux.yaml
+- clientSettingsPolicy.yaml
+- http-gateway.yaml
+- nfg-proxy-config.yaml
+- snippetPolicy.yaml
+- standard-install.yaml
+- tcp-gateway.yaml
