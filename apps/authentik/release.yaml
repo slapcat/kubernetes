@@ -18,7 +18,7 @@ spec:
   values:
     authentik:
       existingSecret:
-        secretName: authentik-secret
+        secretName: authentik
         error_reporting:
             enabled: false
     postgresql:
