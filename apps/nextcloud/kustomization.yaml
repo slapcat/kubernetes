@@ -1,7 +1,6 @@
 namespace: default
 
 resources:
-- flux.yaml
 - backendTLSPolicy.yaml
 - cm-remoteip.yaml
 - cm-ssl.yaml

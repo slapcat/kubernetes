@@ -1,0 +1,17 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: backup
+spec:
+  interval: 30m0s
+  targetNamespace: backup
+  path: ./overlays/backup/chicago
+  prune: false
+  retryInterval: 2m0s
+  sourceRef:
+    kind: GitRepository
+    name: kubernetes
+    namespace: flux-system
+  timeout: 3m0s
+  wait: true

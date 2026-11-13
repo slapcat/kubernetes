@@ -1,0 +1,15 @@
+namespace: backup
+
+resources:
+- authentik.yaml
+- clusterRoleBinding.yaml
+- clusterRole.yaml
+- ldap.yaml
+- mariadb.yaml
+- opendirectory.yaml
+- pv-backup.yaml
+- pv-node-backup.yaml
+- rsync-daphne.yaml
+- rsync-mcguirk.yaml
+- rsync-meatwad.yaml
+- sa.yaml

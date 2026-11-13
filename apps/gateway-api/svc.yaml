@@ -1,0 +1,75 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: http-nginx
+  namespace: nginx-gateway
+  labels:
+    app.kubernetes.io/instance: ngf
+    app.kubernetes.io/managed-by: ngf-nginx
+    app.kubernetes.io/name: http-nginx
+    gateway.networking.k8s.io/gateway-name: http
+spec:
+  allocateLoadBalancerNodePorts: true
+  externalTrafficPolicy: Local
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: PreferDualStack
+  ports:
+  - name: port-80
+    nodePort: 30103
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  - name: port-443
+    nodePort: 32016
+    port: 443
+    protocol: TCP
+    targetPort: 443
+  selector:
+    app.kubernetes.io/instance: ngf
+    app.kubernetes.io/managed-by: ngf-nginx
+    app.kubernetes.io/name: http-nginx
+    gateway.networking.k8s.io/gateway-name: http
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tcp-nginx
+  namespace: nginx-gateway
+  labels:
+    app.kubernetes.io/instance: ngf
+    app.kubernetes.io/managed-by: ngf-nginx
+    app.kubernetes.io/name: tcp-nginx
+    gateway.networking.k8s.io/gateway-name: tcp
+spec:
+  allocateLoadBalancerNodePorts: true
+  externalTrafficPolicy: Local
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: PreferDualStack
+  ports:
+  - name: port-389
+    nodePort: 31832
+    port: 389
+    protocol: TCP
+    targetPort: 389
+  - name: port-636
+    nodePort: 30611
+    port: 636
+    protocol: TCP
+    targetPort: 636
+  - name: port-8389
+    nodePort: 31913
+    port: 8389
+    protocol: TCP
+    targetPort: 8389
+  selector:
+    app.kubernetes.io/instance: ngf
+    app.kubernetes.io/managed-by: ngf-nginx
+    app.kubernetes.io/name: tcp-nginx
+    gateway.networking.k8s.io/gateway-name: tcp
+  type: LoadBalancer

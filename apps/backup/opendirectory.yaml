@@ -1,0 +1,37 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: opendirectory
+spec:
+  schedule: "45 3 * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 120
+      template:
+        spec:
+          volumes:
+          - name: ssh
+            secret:
+              secretName: opendirectory
+          - name: backup
+            persistentVolumeClaim:
+              claimName: backup
+          containers:
+          - image: debian
+            imagePullPolicy: Always
+            name: debian
+            volumeMounts:
+            - mountPath: "/ssh"
+              name: ssh
+            - mountPath: "/backup"
+              name: backup
+            command:
+            - /bin/sh
+            - -c
+            - | 
+              apt update && apt install -y openssh-client && \
+              cp /ssh/id_ed25519 . && chmod 600 id_ed25519 && \
+              ssh -o StrictHostKeyChecking=no -i id_ed25519 root@opendirectory.lan > /backup/ldap/opendirectory-$(date -I).ldif
+          restartPolicy: OnFailure

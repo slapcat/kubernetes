@@ -2,6 +2,5 @@ namespace: cert-manager
 
 resources:
 - clusterIssuer.yaml
-- flux.yaml
 - repo.yaml
 - release.yaml

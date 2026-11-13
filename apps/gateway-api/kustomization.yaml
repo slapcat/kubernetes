@@ -1,7 +1,6 @@
 namespace: nginx-gateway
 
 resources:
-- flux.yaml
 - clientSettingsPolicy.yaml
 - http-gateway.yaml
 - nfg-proxy-config.yaml

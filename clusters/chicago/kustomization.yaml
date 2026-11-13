@@ -1,13 +1,13 @@
+namespace: flux-system
+
 resources:
 - flux.yaml
 - source.yaml
 - flux-system
-- ../../apps/guacamole
-- ../../apps/authentik
-- ../../apps/mariadb
-- ../../apps/nextcloud
-- ../../apps/cert-manager
-- ../../overlays/rustdesk/chicago
-- ../../overlays/gateway-api/chicago
-- ../../overlays/backup/chicago
-
+- guacamole.yaml
+- authentik.yaml
+- mariadb.yaml
+- nextcloud.yaml
+- cert-manager.yaml
+- rustdesk.yaml
+- backup.yaml

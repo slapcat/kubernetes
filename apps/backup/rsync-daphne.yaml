@@ -1,0 +1,44 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: rsync-daphne
+spec:
+  schedule: "0 3 * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 120
+      template:
+        spec:
+          nodeName: daphne
+          volumes:
+          - name: microceph
+            persistentVolumeClaim:
+              claimName: microceph
+          - name: etc
+            persistentVolumeClaim:
+              claimName: etc
+          - name: backup
+            persistentVolumeClaim:
+              claimName: backup
+          containers:
+          - image: ghcr.io/slapcat/rsync:latest
+            imagePullPolicy: Always
+            name: rsync
+            volumeMounts:
+            - mountPath: "/mnt/etc"
+              name: etc
+            - mountPath: "/mnt/microceph"
+              name: microceph
+            - mountPath: "/backups"
+              name: backup
+            command: ["rsync"]
+            args:
+            - "-Aav"
+            - "--delete"
+            - "--exclude"
+            - "logs"
+            - "/mnt/"
+            - "/backups/nodes/daphne/"
+          restartPolicy: OnFailure

@@ -1,0 +1,6 @@
+resources:
+  - ../../../apps/gateway-api
+  - certs.yaml
+
+patches:
+  - path: svc.yaml

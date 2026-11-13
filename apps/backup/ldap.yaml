@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ldap
+spec:
+  schedule: "0 3 * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 120
+      template:
+        spec:
+          serviceAccountName: backup
+          volumes:
+          - name: backup
+            persistentVolumeClaim:
+              claimName: backup
+          containers:
+          - image: alpine/kubectl
+            imagePullPolicy: Always
+            name: kubectl
+            volumeMounts:
+            - mountPath: "/backup"
+              name: backup
+            command:
+            - /bin/sh
+            - -c
+            - | 
+              kubectl exec -n default sts/openldap -- slapcat -F /bitnami/openldap/slapd.d/ -n 2 > /backup/ldap/nabasny-data-$(date -I).ldif &&
+              kubectl exec -n default sts/openldap -- slapcat -F /bitnami/openldap/slapd.d/ -n 0 > /backup/ldap/nabasny-config-$(date -I).ldif
+          restartPolicy: OnFailure

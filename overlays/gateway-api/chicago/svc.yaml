@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: http-nginx
+  namespace: nginx-gateway
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: 10.10.1.116
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tcp-nginx
+  namespace: nginx-gateway
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: 10.10.1.105

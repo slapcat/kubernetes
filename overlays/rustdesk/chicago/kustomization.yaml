@@ -1,5 +1,4 @@
 resources:
-  - flux.yaml
   - ../../../apps/rustdesk
 
 patches:

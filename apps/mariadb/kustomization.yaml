@@ -1,7 +1,6 @@
 namespace: default
 
 resources:
-- flux.yaml
 - mariadb.yaml
 - svc.yaml
 - pvc.yaml
