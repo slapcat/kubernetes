@@ -4,8 +4,6 @@ metadata:
   annotations:
     meta.helm.sh/release-name: ngf
     meta.helm.sh/release-namespace: nginx-gateway
-  creationTimestamp: "2026-07-05T18:02:43Z"
-  generation: 9
   labels:
     app.kubernetes.io/instance: ngf
     app.kubernetes.io/managed-by: Helm
@@ -14,8 +12,6 @@ metadata:
     helm.sh/chart: nginx-gateway-fabric-2.6.7
   name: ngf-proxy-config
   namespace: nginx-gateway
-  resourceVersion: "359221303"
-  uid: 28532750-f417-43d8-a5b1-088258d68530
 spec:
   ipFamily: dual
   kubernetes:
