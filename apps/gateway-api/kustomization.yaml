@@ -1,3 +1,5 @@
+namespace: nginx-gateway
+
 resources:
 - flux.yaml
 - clientSettingsPolicy.yaml
@@ -6,3 +8,4 @@ resources:
 - snippetPolicy.yaml
 - standard-install.yaml
 - tcp-gateway.yaml
+- svc.yaml

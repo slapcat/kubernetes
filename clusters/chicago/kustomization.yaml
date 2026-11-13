@@ -6,4 +6,8 @@ resources:
 - ../../apps/authentik
 - ../../apps/mariadb
 - ../../apps/nextcloud
+- ../../apps/cert-manager
 - ../../overlays/rustdesk/chicago
+- ../../overlays/gateway-api/chicago
+- ../../overlays/backup/chicago
+

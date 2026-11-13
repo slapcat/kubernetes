@@ -1,0 +1,25 @@
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+ name: lets-encrypt
+spec:
+ acme:
+   email: jake@nabasny.com
+   server: https://acme-v02.api.letsencrypt.org/directory
+   privateKeySecretRef:
+     name: lets-encrypt-priviate-key
+   solvers:
+   - http01:
+        gatewayHTTPRoute:
+          parentRefs:
+          - name: http
+            namespace: nginx-gateway
+            kind: Gateway
+   - dns01:
+      cnameStrategy: Follow
+      cloudflare:
+        email: jake@nabasny.com
+        apiTokenSecretRef:
+          name: cloudflare-api-token-secret
+          key: api-token
