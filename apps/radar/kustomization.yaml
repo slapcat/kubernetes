@@ -1,0 +1,5 @@
+namespace: radar
+
+resources:
+- repo.yaml
+- release.yaml

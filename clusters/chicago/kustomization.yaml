@@ -12,3 +12,4 @@ resources:
 - rustdesk.yaml
 - backup.yaml
 - gateway-api.yaml
+- radar.yaml
