@@ -1,6 +1,8 @@
 namespace: nginx-gateway
 
 resources:
+- repo.yaml
+- release.yaml
 - clientSettingsPolicy.yaml
 - http-gateway.yaml
 - nfg-proxy-config.yaml

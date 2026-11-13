@@ -1,0 +1,172 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: http
+  namespace: nginx-gateway
+  annotations:
+    cert-manager.io/cluster-issuer: lets-encrypt
+spec:
+  gatewayClassName: nginx
+  listeners:
+  - name: http
+    port: 80
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: All
+  - name: default
+    port: 443
+    protocol: HTTPS
+    hostname: "nabasny.com"
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        name: nabasny
+  - name: wildcard-default
+    port: 443
+    protocol: HTTPS
+    hostname: "*.nabasny.com"
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        name: wildcard-nabasny
+  - name: auth
+    port: 443
+    protocol: HTTPS
+    hostname: "auth.nabasny.com"
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        name: authentik
+  - name: mail
+    port: 443
+    protocol: HTTPS
+    hostname: "mail.nabasny.com"
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        name: mail
+  - name: rats
+    port: 443
+    protocol: HTTPS
+    hostname: "rats.nabasny.com"
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        name: rats
+  - name: profile
+    port: 443
+    protocol: HTTPS
+    hostname: "profile.nabasny.com"
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        name: profile
+  - name: jake
+    port: 443
+    protocol: HTTPS
+    hostname: "jake.nabasny.com"
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        name: jake
+  - name: wiki
+    port: 443
+    protocol: HTTPS
+    hostname: "wiki.nabasny.com"
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        name: wiki
+  - name: gutenberg
+    port: 443
+    protocol: HTTPS
+    hostname: "gutenberg.nabasny.com"
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        name: gutenberg
+  - name: box
+    port: 443
+    protocol: HTTPS
+    hostname: "box.nabasny.com"
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        name: box
+  - name: opendirectory
+    port: 443
+    protocol: HTTPS
+    hostname: "opendirectory.net"
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        name: opendirectory
+  - name: wildcard-opendirectory-2
+    port: 443
+    protocol: HTTPS
+    hostname: "*.opendirectory.net"
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        name: wildcard-opendirectory
+  - name: dl
+    port: 443
+    protocol: HTTPS
+    hostname: "dl.nabasny.com"
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        name: dl

@@ -4,3 +4,5 @@ resources:
 
 patches:
   - path: svc.yaml
+  - path: http-gateway.yaml
+  - path: tcp-gateway.yaml

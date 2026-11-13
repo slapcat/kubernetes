@@ -1,9 +1,9 @@
 namespace: flux-system
 
 resources:
+- flux-system/
 - flux.yaml
 - source.yaml
-- flux-system
 - guacamole.yaml
 - authentik.yaml
 - mariadb.yaml
@@ -11,3 +11,4 @@ resources:
 - cert-manager.yaml
 - rustdesk.yaml
 - backup.yaml
+- gateway-api.yaml
