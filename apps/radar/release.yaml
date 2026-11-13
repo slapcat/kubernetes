@@ -9,7 +9,7 @@ spec:
   timeout: 5m
   chart:
     spec:
-      chart: radar-hub
+      chart: radar
       version: '1.20.2'
       sourceRef:
         kind: HelmRepository
