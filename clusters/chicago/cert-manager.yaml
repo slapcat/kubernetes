@@ -5,7 +5,7 @@ metadata:
   name: cert-manager
 spec:
   interval: 30m0s
-  targetNamespace: default
+  targetNamespace: cert-manager
   path: ./apps/cert-manager
   prune: false
   retryInterval: 2m0s
