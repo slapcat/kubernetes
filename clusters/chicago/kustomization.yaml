@@ -14,3 +14,5 @@ resources:
 - gateway-api.yaml
 - radar.yaml
 - apache2.yaml
+- dl.yaml
+- reflector.yaml
