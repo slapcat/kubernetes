@@ -6,16 +6,10 @@ metadata:
 spec:
   interval: 15m
   timeout: 5m
-#  chartRef:
-#    kind: OCIRepository
-#    name: seerr
+  chartRef:
+    kind: OCIRepository
+    name: seerr
   chart:
     spec:
-      chart: seerr
-      version: '3.3.0'
-      sourceRef:
-        kind: OCIRepository
-        name: seerr
-      interval: 5m
       valuesFiles:
         - values.yaml
