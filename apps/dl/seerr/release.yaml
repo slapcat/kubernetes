@@ -9,7 +9,6 @@ spec:
   chartRef:
     kind: OCIRepository
     name: seerr
-  chart:
-    spec:
-      valuesFiles:
-        - values.yaml
+  valuesFrom:
+    - kind: Secret
+      name: seerr

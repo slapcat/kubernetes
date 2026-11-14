@@ -3,3 +3,11 @@ namespace: dl
 resources:
 - release.yaml
 - repo.yaml
+
+secretGenerator:
+- name: seerr
+  files:
+  - values.yaml=values.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
