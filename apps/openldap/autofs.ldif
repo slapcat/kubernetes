@@ -1,0 +1,17 @@
+dn: ou=auto.extra,ou=autofs,dc=nabasny,dc=com
+ou: auto.extra
+objectClass: automountMap
+objectClass: top
+
+dn: ou=auto.master,ou=autofs,dc=nabasny,dc=com
+ou: auto.master
+objectClass: automountMap
+objectClass: top
+
+dn: cn=jake,ou=auto.extra,ou=autofs,dc=nabasny,dc=com
+automountInformation: -fstype=nfs,rw,hard,intr,nodev 10.10.0.40:/extra/gutenbe
+ rg
+cn: jake
+objectClass: automount
+objectClass: top
+

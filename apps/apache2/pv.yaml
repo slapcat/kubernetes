@@ -1,0 +1,63 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: apache
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: ""
+  volumeMode: Filesystem
+  volumeName: apache
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: apache
+spec:
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: 10Gi
+  csi:
+    driver: rook-ceph.cephfs.csi.ceph.com
+    nodeStageSecretRef:
+      name: rook-csi-cephfs-node
+      namespace: rook-ceph-external
+    volumeAttributes:
+      "fsName": "nabasny"
+      "clusterID": "rook-ceph-external"
+      "staticVolume": "true"
+      "rootPath": "/sites"
+    volumeHandle: apache
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: gutenberg
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 3Ti
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/extra/gutenberg"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gutenberg
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 3Ti
+

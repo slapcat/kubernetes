@@ -1,0 +1,161 @@
+
+dn: cn={7}configFile,cn=schema,cn=config
+objectClass: olcSchemaConfig
+cn: {7}configFile
+olcObjectClasses: {0}( 1.3.6.1.4.1.59010.3.1 NAME 'configFile' SUP top STRUCTU
+ RAL DESC 'Schema for generic configuration files' MUST ( cn $ path ) MAY ( de
+ scription $ data $ permissions $ serviceName ) )
+structuralObjectClass: olcSchemaConfig
+entryUUID: 681f5bf0-79ba-103e-8cc5-950f8124c207
+creatorsName: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+createTimestamp: 20240318212954Z
+olcAttributeTypes: {0}( 1.3.6.1.4.1.59010.1.8 NAME 'path' DESC 'Path for confi
+ guration file' EQUALITY caseExactMatch SUBSTR caseExactSubstringsMatch SYNTAX
+  1.3.6.1.4.1.1466.115.121.1.15{1024} SINGLE-VALUE )
+olcAttributeTypes: {1}( 1.3.6.1.4.1.59010.1.9 NAME 'data' DESC 'Generic config
+ uration file data' EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.15  SINGLE-VALUE )
+olcAttributeTypes: {2}( 1.3.6.1.4.1.59010.1.10 NAME 'permissions' DESC 'Linux 
+ file permissions of the configuration file' EQUALITY numericStringMatch SYNTA
+ X 1.3.6.1.4.1.1466.115.121.1.36 SINGLE-VALUE )
+olcAttributeTypes: {3}( 1.3.6.1.4.1.59010.1.35 NAME 'serviceName' DESC 'System
+ d service using this configuration file' EQUALITY caseIgnoreMatch SUBSTR case
+ IgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} SINGLE-VALUE
+  )
+entryCSN: 20240322231029.698321Z#000000#000#000000
+modifiersName: cn=admin,cn=config
+modifyTimestamp: 20240322231029Z
+
+dn: cn={8}keepalivedGlobalConfig,cn=schema,cn=config
+objectClass: olcSchemaConfig
+cn: {8}keepalivedGlobalConfig
+olcAttributeTypes: {0}( 1.3.6.1.4.1.59010.1.11 NAME 'globalNotificationEmail' 
+ DESC 'TO address for notification emails' EQUALITY caseIgnoreMatch SUBSTR cas
+ eIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} )
+olcAttributeTypes: {1}( 1.3.6.1.4.1.59010.1.12 NAME 'globalNotificationEmailFr
+ om' DESC 'FROM Address for notification emails' EQUALITY caseIgnoreMatch SUBS
+ TR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} SINGL
+ E-VALUE )
+olcAttributeTypes: {2}( 1.3.6.1.4.1.59010.1.13 NAME 'globalSMTPServer' DESC 'S
+ MTP server address' EQUALITY caseExactMatch SUBSTR caseExactSubstringsMatch S
+ YNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} SINGLE-VALUE )
+olcAttributeTypes: {3}( 1.3.6.1.4.1.59010.1.14 NAME 'globalSMTPConnectTimeout'
+  DESC 'Timeout value for SMTP connections' EQUALITY integerMatch SYNTAX 1.3.6
+ .1.4.1.1466.115.121.1.27 SINGLE-VALUE )
+olcAttributeTypes: {4}( 1.3.6.1.4.1.59010.1.15 NAME 'globalLVSId' DESC 'LVS ID
+  string' EQUALITY caseExactMatch SUBSTR caseExactSubstringsMatch SYNTAX 1.3.6
+ .1.4.1.1466.115.121.1.15{1024} SINGLE-VALUE )
+olcObjectClasses: {0}( 1.3.6.1.4.1.59010.3.2 NAME 'keepalivedGlobalConfig' SUP
+  configFile STRUCTURAL DESC 'Schema for keepalived global settings' MAY ( glo
+ balNotificationEmail $ globalNotificationEmailFrom $ globalSMTPServer $ globa
+ lSMTPConnectTimeout $ globalLVSId ) )
+structuralObjectClass: olcSchemaConfig
+entryUUID: 69f3f850-79ba-103e-8cc6-950f8124c207
+creatorsName: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+createTimestamp: 20240318212957Z
+entryCSN: 20240318212957.953498Z#000000#000#000000
+modifiersName: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+modifyTimestamp: 20240318212957Z
+
+dn: cn={9}keepalivedVRRPGroupConfig,cn=schema,cn=config
+objectClass: olcSchemaConfig
+cn: {9}keepalivedVRRPGroupConfig
+olcAttributeTypes: {0}( 1.3.6.1.4.1.59010.1.16 NAME 'groupName' DESC 'Group na
+ me' EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.
+ 4.1.1466.115.121.1.15{1024} SINGLE-VALUE )
+olcAttributeTypes: {1}( 1.3.6.1.4.1.59010.1.17 NAME 'groupMember' DESC 'Member
+  of VRRP sync group' EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatc
+ h SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} )
+olcAttributeTypes: {2}( 1.3.6.1.4.1.59010.1.18 NAME 'notifyMasterVRRPGroup' DE
+ SC 'Notify master script path' EQUALITY caseExactMatch SUBSTR caseExactSubstr
+ ingsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} SINGLE-VALUE )
+olcAttributeTypes: {3}( 1.3.6.1.4.1.59010.1.19 NAME 'notifyBackupVRRPGroup' DE
+ SC 'Notify backup script path' EQUALITY caseExactMatch SUBSTR caseExactSubstr
+ ingsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} SINGLE-VALUE )
+olcAttributeTypes: {4}( 1.3.6.1.4.1.59010.1.20 NAME 'notifyFaultVRRPGroup' DES
+ C 'Notify fault script path' EQUALITY caseExactMatch SUBSTR caseExactSubstrin
+ gsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} SINGLE-VALUE )
+olcObjectClasses: {0}( 1.3.6.1.4.1.59010.3.3 NAME 'keepalivedVRRPGroupConfig' 
+ SUP configFile STRUCTURAL DESC 'Schema for keepalived VRRP sync group setting
+ s' MUST ( groupName $ groupMember ) MAY ( notifyMasterVRRPGroup $ notifyBacku
+ pVRRPGroup $ notifyFaultVRRPGroup ) )
+structuralObjectClass: olcSchemaConfig
+entryUUID: 6ccb9a06-79ba-103e-8cc7-950f8124c207
+creatorsName: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+createTimestamp: 20240318213002Z
+entryCSN: 20240318213002.722104Z#000000#000#000000
+modifiersName: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+modifyTimestamp: 20240318213002Z
+
+dn: cn={10}keepalivedVRRPInstanceConfig,cn=schema,cn=config
+objectClass: olcSchemaConfig
+cn: {10}keepalivedVRRPInstanceConfig
+olcAttributeTypes: {0}( 1.3.6.1.4.1.59010.1.36 NAME 'instanceName' DESC 'Insta
+ nce name' EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.
+ 3.6.1.4.1.1466.115.121.1.15{1024} SINGLE-VALUE )
+olcAttributeTypes: {1}( 1.3.6.1.4.1.59010.1.21 NAME 'interface' DESC 'Interfac
+ e for VIP' EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1
+ .3.6.1.4.1.1466.115.121.1.15{1024} SINGLE-VALUE )
+olcAttributeTypes: {2}( 1.3.6.1.4.1.59010.1.37 NAME 'notifyMasterVRRPInstance'
+  DESC 'Notify master script path' EQUALITY caseExactMatch SUBSTR caseExactSub
+ stringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} SINGLE-VALUE )
+olcAttributeTypes: {3}( 1.3.6.1.4.1.59010.1.38 NAME 'notifyBackupVRRPInstance'
+  DESC 'Notify backup script path' EQUALITY caseExactMatch SUBSTR caseExactSub
+ stringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} SINGLE-VALUE )
+olcAttributeTypes: {4}( 1.3.6.1.4.1.59010.1.39 NAME 'notifyFaultVRRPInstance' 
+ DESC 'Notify fault script path' EQUALITY caseExactMatch SUBSTR caseExactSubst
+ ringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} SINGLE-VALUE )
+olcAttributeTypes: {5}( 1.3.6.1.4.1.59010.1.22 NAME 'mcastSrcIP' DESC 'Multica
+ st source IP' EQUALITY caseExactMatch SUBSTR caseExactSubstringsMatch SYNTAX 
+ 1.3.6.1.4.1.1466.115.121.1.15{1024} SINGLE-VALUE )
+olcAttributeTypes: {6}( 1.3.6.1.4.1.59010.1.23 NAME 'lvsSyncDaemonInterface' D
+ ESC 'LVS sync daemon interface' EQUALITY caseExactMatch SUBSTR caseExactSubst
+ ringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} SINGLE-VALUE )
+olcAttributeTypes: {7}( 1.3.6.1.4.1.59010.1.24 NAME 'virtualRouterID' DESC 'Vi
+ rtual router ID' EQUALITY integerMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.27  
+ SINGLE-VALUE )
+olcAttributeTypes: {8}( 1.3.6.1.4.1.59010.1.25 NAME 'priority' DESC 'Priority 
+ (0-255)' EQUALITY integerMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 SINGLE-VA
+ LUE )
+olcAttributeTypes: {9}( 1.3.6.1.4.1.59010.1.26 NAME 'advertInt' DESC 'Advertis
+ e interval' EQUALITY integerMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 SINGLE
+ -VALUE )
+olcAttributeTypes: {10}( 1.3.6.1.4.1.59010.1.27 NAME 'smtpAlert' DESC 'Enable 
+ SMTP alerting' EQUALITY booleanMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SING
+ LE-VALUE )
+olcAttributeTypes: {11}( 1.3.6.1.4.1.59010.1.28 NAME 'authType' DESC 'Authenti
+ cation type' EQUALITY caseExactMatch SUBSTR caseExactSubstringsMatch SYNTAX 1
+ .3.6.1.4.1.1466.115.121.1.15{1024} SINGLE-VALUE )
+olcAttributeTypes: {12}( 1.3.6.1.4.1.59010.1.29 NAME 'authPass' DESC 'Authenti
+ cation password' EQUALITY caseExactMatch SUBSTR caseExactSubstringsMatch SYNT
+ AX 1.3.6.1.4.1.1466.115.121.1.15{1024} SINGLE-VALUE )
+olcAttributeTypes: {13}( 1.3.6.1.4.1.59010.1.30 NAME 'virtualIPAddress' DESC '
+ Virtual IP address' EQUALITY caseExactMatch SUBSTR caseExactSubstringsMatch S
+ YNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} )
+olcAttributeTypes: {14}( 1.3.6.1.4.1.59010.1.31 NAME 'virtualIPAddressExcluded
+ ' DESC 'Excluded virtual IP address' EQUALITY caseExactMatch SUBSTR caseExact
+ SubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} )
+olcAttributeTypes: {15}( 1.3.6.1.4.1.59010.1.32 NAME 'state' DESC 'Instance st
+ ate' EQUALITY caseExactMatch SUBSTR caseExactSubstringsMatch SYNTAX 1.3.6.1.4
+ .1.1466.115.121.1.15{1024} SINGLE-VALUE )
+olcAttributeTypes: {16}( 1.3.6.1.4.1.59010.1.33 NAME 'unicastSrcIP' DESC 'Unic
+ ast source IP' EQUALITY caseExactMatch SUBSTR caseExactSubstringsMatch SYNTAX
+  1.3.6.1.4.1.1466.115.121.1.15{1024} SINGLE-VALUE )
+olcAttributeTypes: {17}( 1.3.6.1.4.1.59010.1.34 NAME 'unicastPeer' DESC 'Unica
+ st peer' EQUALITY caseExactMatch SUBSTR caseExactSubstringsMatch SYNTAX 1.3.6
+ .1.4.1.1466.115.121.1.15{1024} )
+olcObjectClasses: {0}( 1.3.6.1.4.1.59010.3.4 NAME 'keepalivedVRRPInstanceConfi
+ g' SUP configFile STRUCTURAL DESC 'Schema for keepalived VRRP instance settin
+ gs' MUST ( instanceName $ interface $ state $ virtualRouterID $ priority $ vi
+ rtualIPAddress ) MAY ( notifyMasterVRRPInstance $ notifyBackupVRRPInstance $ 
+ notifyFaultVRRPInstance $ mcastSrcIP $ lvsSyncDaemonInterface $ advertInt $ s
+ mtpAlert $ authType $ authPass $ virtualIPAddressExcluded $ unicastSrcIP $ un
+ icastPeer ) )
+structuralObjectClass: olcSchemaConfig
+entryUUID: 6f9f7360-79ba-103e-8cc8-950f8124c207
+creatorsName: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+createTimestamp: 20240318213007Z
+entryCSN: 20240318213007.465921Z#000000#000#000000
+modifiersName: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+modifyTimestamp: 20240318213007Z
+

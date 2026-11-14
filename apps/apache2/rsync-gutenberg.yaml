@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: rsync-gutenberg
+spec:
+  schedule: "30 1 * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 120
+      template:
+        spec:
+          nodeName: mcguirk
+          volumes:
+          - name: gutenberg
+            persistentVolumeClaim:
+              claimName: gutenberg
+          containers:
+          - image: ghcr.io/slapcat/rsync:latest
+            imagePullPolicy: Always
+            name: rsync
+            volumeMounts:
+            - mountPath: "/extra/gutenberg"
+              name: gutenberg
+            command: ["rsync"]
+            args:
+            - "-rvHS"
+            - "--timeout"
+            - "600"
+            - "--delete"
+            - "--exclude"
+            - "cache/"
+            - "aleph.gutenberg.org::gutenberg"
+            - "/extra/gutenberg/"
+          restartPolicy: OnFailure

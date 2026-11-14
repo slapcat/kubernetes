@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: apache
+  name: apache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apache
+  template:
+    metadata:
+      labels:
+        app: apache
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: apache
+        - name: gutenberg
+          persistentVolumeClaim:
+            claimName: gutenberg
+        - name: config
+          configMap:
+            name: apache
+      containers:
+      - image: ghcr.io/slapcat/php:latest
+        name: php
+        volumeMounts:
+          - mountPath: "/var/www/html"
+            name: data
+          - mountPath: "/var/www/gutenberg"
+            name: gutenberg
+          - mountPath: "/etc/apache2/sites-enabled"
+            name: config
+        ports:
+          - containerPort: 80

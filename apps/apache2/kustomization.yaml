@@ -1,0 +1,10 @@
+namespace: default
+
+resources:
+- cm.yaml
+- deploy.yaml
+- pv.yaml
+- route-nabasny.yaml
+- route-subdomains.yaml
+- rsync-gutenberg.yaml
+- svc.yaml

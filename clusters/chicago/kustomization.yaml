@@ -13,3 +13,4 @@ resources:
 - backup.yaml
 - gateway-api.yaml
 - radar.yaml
+- apache2.yaml
