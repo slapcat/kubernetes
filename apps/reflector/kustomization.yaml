@@ -1,0 +1,5 @@
+namespace: kube-system
+
+resources:
+- release.yaml
+- repo.yaml

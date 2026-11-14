@@ -1,0 +1,5 @@
+namespace: default
+
+resources:
+- release.yaml
+- repo.yaml

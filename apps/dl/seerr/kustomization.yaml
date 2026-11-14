@@ -1,0 +1,5 @@
+namespace: dl
+
+resources:
+- release.yaml
+- repo.yaml
