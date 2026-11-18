@@ -5,7 +5,7 @@ resources:
 - release.yaml
 - clientSettingsPolicy.yaml
 - http-gateway.yaml
-- nfg-proxy-config.yaml
+#- nfg-proxy-config.yaml
 - snippetPolicy.yaml
 - standard-install.yaml
 - tcp-gateway.yaml
