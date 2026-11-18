@@ -1,15 +1,6 @@
 apiVersion: gateway.nginx.org/v1alpha2
 kind: NginxProxy
 metadata:
-  annotations:
-    meta.helm.sh/release-name: ngf
-    meta.helm.sh/release-namespace: nginx-gateway
-  labels:
-    app.kubernetes.io/instance: ngf
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: nginx-gateway-fabric
-    app.kubernetes.io/version: 2.6.7
-    helm.sh/chart: nginx-gateway-fabric-2.6.7
   name: ngf-proxy-config
   namespace: nginx-gateway
 spec:
@@ -20,7 +11,7 @@ spec:
         image:
           pullPolicy: IfNotPresent
           repository: ghcr.io/nginx/nginx-gateway-fabric/nginx
-          tag: 2.6.7
+          tag: 2.9.0
       replicas: 1
     service:
       externalTrafficPolicy: Local
