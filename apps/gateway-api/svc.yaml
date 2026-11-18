@@ -5,8 +5,6 @@ metadata:
   name: http-nginx
   namespace: nginx-gateway
   labels:
-    app.kubernetes.io/instance: ngf
-    app.kubernetes.io/managed-by: ngf-nginx
     app.kubernetes.io/name: http-nginx
     gateway.networking.k8s.io/gateway-name: http
 spec:
@@ -28,8 +26,6 @@ spec:
     protocol: TCP
     targetPort: 443
   selector:
-    app.kubernetes.io/instance: ngf
-    app.kubernetes.io/managed-by: ngf-nginx
     app.kubernetes.io/name: http-nginx
     gateway.networking.k8s.io/gateway-name: http
   type: LoadBalancer
@@ -40,8 +36,6 @@ metadata:
   name: tcp-nginx
   namespace: nginx-gateway
   labels:
-    app.kubernetes.io/instance: ngf
-    app.kubernetes.io/managed-by: ngf-nginx
     app.kubernetes.io/name: tcp-nginx
     gateway.networking.k8s.io/gateway-name: tcp
 spec:
@@ -68,8 +62,6 @@ spec:
     protocol: TCP
     targetPort: 8389
   selector:
-    app.kubernetes.io/instance: ngf
-    app.kubernetes.io/managed-by: ngf-nginx
     app.kubernetes.io/name: tcp-nginx
     gateway.networking.k8s.io/gateway-name: tcp
   type: LoadBalancer
